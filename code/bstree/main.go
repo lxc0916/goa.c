@@ -278,6 +278,33 @@ func (node *BinarySearchTreeNode) MidOrder() {
 	// 打印右子树
 	node.Right.MidOrder()
 }
+// 树高
+func (tree *BinarySearchTree) GetHeight() int {
+    if tree.Root == nil {
+        // 如果是空树，返回0
+        return 0
+    }
+    return tree.Root.GetHeight()
+}
+
+func (node *BinarySearchTreeNode) GetHeight() int {
+    if node == nil {
+        return 0
+    } else {
+        //左边的子树深度
+        left := node.Left.GetHeight()
+        //右边的子树深度
+        right := node.Right.GetHeight()
+
+        max := left;
+
+        if right > max {
+            max = right
+        }
+        return max + 1
+    }
+}
+
 
 func main() {
 	values := []int64{3, 6, 8, 20, 9, 2, 6, 8, 9, 3, 5, 40, 7, 9, 13, 6, 8}
@@ -319,4 +346,6 @@ func main() {
 
 	// 中序遍历，实现排序
 	tree.MidOrder()
+	height := tree.GetHeight()
+        fmt.Println(height)
 }
